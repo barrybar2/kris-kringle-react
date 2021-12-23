@@ -56,7 +56,7 @@ const KrisKringle = () => {
 							{participent.added ? (
 								<Button
 									color="success"
-									style={{ marginTop: '5' }}
+									style={{ margin: '15px' }}
 									variant="contained"
 									onClick={() => { updateParticipant(index, false) }}
 									startIcon={participent.SMSSent ? <DoneAllIcon /> : <EditIcon />}>
@@ -65,7 +65,7 @@ const KrisKringle = () => {
 							) : (
 								<Button
 									color="success"
-									style={{ marginTop: '16px' }}
+									style={{ margin: '15px' }}
 									variant="contained"
 									onClick={() => { addParticipant(index) }}
 									startIcon={participent.SMSSent ? <DoneAllIcon /> : <AddCircleIcon />}>
