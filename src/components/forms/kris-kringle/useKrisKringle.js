@@ -6,6 +6,7 @@ const useKrisKringle = () => {
 	const [participants, setParticipants] = useState([{ id: 0, ...emptyParticipent }]);
 	const [loading, setLoading] = useState(false);
 	const [SMSSent, setSMSSent] = useState(false);
+	const smallWidth = "calc(100% - 20px)";
 
 	const handleChange = (i, e) => {
 		let newParticipents = [...participants];
@@ -125,6 +126,7 @@ const useKrisKringle = () => {
 	};
 
 	return {
+		smallWidth,
 		participants,
 		addParticipant,
 		updateParticipant,
