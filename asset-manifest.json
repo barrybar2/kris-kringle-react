@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/kris-kringle-react/static/css/main.e6c13ad2.css",
-    "main.js": "/kris-kringle-react/static/js/main.a0420dea.js",
+    "main.js": "/kris-kringle-react/static/js/main.90dc3da9.js",
     "static/js/787.2c9a354e.chunk.js": "/kris-kringle-react/static/js/787.2c9a354e.chunk.js",
     "index.html": "/kris-kringle-react/index.html",
     "main.e6c13ad2.css.map": "/kris-kringle-react/static/css/main.e6c13ad2.css.map",
-    "main.a0420dea.js.map": "/kris-kringle-react/static/js/main.a0420dea.js.map",
+    "main.90dc3da9.js.map": "/kris-kringle-react/static/js/main.90dc3da9.js.map",
     "787.2c9a354e.chunk.js.map": "/kris-kringle-react/static/js/787.2c9a354e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.a0420dea.js"
+    "static/js/main.90dc3da9.js"
   ]
 }
