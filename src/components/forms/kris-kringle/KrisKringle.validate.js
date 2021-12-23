@@ -19,7 +19,7 @@ const KrisKringleValidationRules = (values, otherRows) => {
 	}
 
 	if(!values.phone) {
-		errors.phone = "The Phone field is required";
+		errors.phone = "The phone numbber field is required";
 	}
 
 	if(values.name) {
@@ -36,13 +36,9 @@ const KrisKringleValidationRules = (values, otherRows) => {
 
 	if(values.phone) {
 		if(checkIfPhoneAlreadyExists(values.phone, otherRows)) {
-			errors.phone = "This phone already exists";
+			errors.phone = "This phone number already exists";
 		}
 	}
-
-	// check to see if there are duplicate partners
-
-	// check to see if there are 
 
 	return errors;
 }

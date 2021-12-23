@@ -15,7 +15,6 @@ const KrisKringle = () => {
 	return (
 
 		<Grid container l={12} justifyContent="center">
-
 			<Box
 				component="form"
 				sx={{
