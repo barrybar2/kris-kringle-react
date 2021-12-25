@@ -1,3 +1,6 @@
+const contactsSupported = 'contacts' in navigator;
+// const contactsSupported = true;
+
 const emptyParticipent = {
 	name: "",
 	phone: "",
@@ -57,7 +60,20 @@ const getPayLoadForPOST = participants => {
 	})
 }
 
+const getContacts = async () => {
+
+	const props = ['name', 'tel'];
+	const opts = {multiple: true};
+
+	try {
+		return await navigator.contacts.select(props, opts);
+	} catch (ex) {
+		// Handle any errors here.
+	}
+  }
+
 export {
+	contactsSupported,
 	emptyParticipent,
 	objectIsPopulated,
 	findPartnerMatch,
@@ -67,6 +83,7 @@ export {
 	validEntry,
 	entryStarted,
 	getPayLoadForPOST,
-	updatePartnerFieldFromName
+	updatePartnerFieldFromName,
+	getContacts
 }
 

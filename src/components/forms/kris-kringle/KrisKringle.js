@@ -11,14 +11,14 @@ import useKrisKringle from "./useKrisKringle";
 
 const KrisKringle = () => {
 
-	const { participants, addParticipant, updateParticipant, handleChange, sendSMSPost, loading, SMSSent, smallWidth } = useKrisKringle();
+	const { contactsSupported, participants, addParticipant, updateParticipant, handleChange, sendSMSPost, loading, SMSSent, smallWidth, addContacts } = useKrisKringle();
 	return (
 
 		<Grid container l={12} justifyContent="center">
 			<Box
 				component="form"
 				sx={{
-					'& .MuiTextField-root': { m: 1, width: [smallWidth, smallWidth, '25ch']	  },
+					'& .MuiTextField-root': { m: 1, width: [smallWidth, smallWidth, '25ch'] },
 				}}
 				noValidate
 				autoComplete="off"
@@ -60,7 +60,7 @@ const KrisKringle = () => {
 									variant="contained"
 									onClick={() => { updateParticipant(index, false) }}
 									startIcon={participent.SMSSent ? <DoneAllIcon /> : <EditIcon />}>
-									{participent.SMSSent ? "Sent" : "Update"}
+									{participent.SMSSent ? "Sent" : "Edit"}
 								</Button>
 							) : (
 								<Button
@@ -76,6 +76,19 @@ const KrisKringle = () => {
 						</div>
 					)
 				}) : null}
+
+				{contactsSupported && (
+					<>
+						<Button
+							color="success"
+							style={{ margin: '15px' }}
+							variant="contained"
+							onClick={() => { addContacts() }}
+							startIcon={<AddCircleIcon />}>
+							Add from your contacts
+						</Button>
+					</>
+				)}
 
 				{participants.length > 2 && (
 					<>
