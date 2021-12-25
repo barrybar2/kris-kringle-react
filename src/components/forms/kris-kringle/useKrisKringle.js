@@ -1,6 +1,6 @@
 import { useState } from "react";
 import validate from "./KrisKringle.validate";
-import { objectIsPopulated, emptyParticipent, findPartnerMatch, findEmptyEntry, filterOutRow, validEntry, entryStarted, getPayLoadForPOST, updatePartnerFieldFromName } from "./KrisKringle.helpers";
+import { contactsSupported, objectIsPopulated, emptyParticipent, findPartnerMatch, findEmptyEntry, filterOutRow, validEntry, entryStarted, getPayLoadForPOST, updatePartnerFieldFromName, getContacts } from "./KrisKringle.helpers";
 
 const useKrisKringle = () => {
 	const [participants, setParticipants] = useState([{ id: 0, ...emptyParticipent }]);
@@ -11,7 +11,7 @@ const useKrisKringle = () => {
 	const handleChange = (i, e) => {
 		let newParticipents = [...participants];
 		const { partner, errors } = newParticipents[i];
-		const {value, id} = e.target;
+		const { value, id } = e.target;
 
 		newParticipents[i][id] = value;
 
@@ -59,6 +59,7 @@ const useKrisKringle = () => {
 		setParticipants(newParticipents);
 	}
 
+
 	const updateSMSSentSuccess = () => {
 		setParticipants(participants.map(participant => {
 			return {
@@ -96,6 +97,8 @@ const useKrisKringle = () => {
 		return allMatchning;
 	}
 
+
+
 	const requestSMSApi = () => {
 		setLoading(true);
 		setTimeout(() => {
@@ -125,7 +128,52 @@ const useKrisKringle = () => {
 		}
 	};
 
+	const populateFromContacts = contacts => {
+		if (participants.length === 1 && (!validEntry(participants[0]))) {
+			setParticipants(contacts);
+		} else {
+			setParticipants([...participants, ...contacts])
+		}
+
+	}
+
+	const getContactId = (participants, index) => {
+		return participants.length === 1 ? (participants.length + index) - 1 : participants.length + index
+	}
+
+	const formatContactNumber = number => {
+		if(!number) return "";
+		const num = String(number);
+		const indexOfComma = num.indexOf(",");
+		let tempNumber = indexOfComma > 0 ? num.substr(0, indexOfComma) : num;
+		return tempNumber.replace(/\s/g, '');
+	}
+
+	const formatContacts = contacts => {
+		return contacts.map((contact, index) => {
+			return {
+				name: contact.name,
+				phone: formatContactNumber(contact.tel),
+				partner: "",
+				added: true,
+				SMSSent: false,
+				errors: {},
+				id: getContactId(participants, index)
+			}
+		})
+	}
+
+	const addContacts = () => {
+		getContacts().then(contacts => {
+			const formattedContacts = formatContacts(contacts);
+			const nextId = (participants.length + formattedContacts.length) - 1
+			const contactsAndAdditionalEntry = [...formattedContacts, { emptyParticipent, id: nextId }];
+			populateFromContacts(contactsAndAdditionalEntry);
+		});
+	}
+
 	return {
+		contactsSupported,
 		smallWidth,
 		participants,
 		addParticipant,
@@ -134,7 +182,8 @@ const useKrisKringle = () => {
 		sendSMSPost,
 		loading,
 		setLoading,
-		SMSSent
+		SMSSent,
+		addContacts
 	}
 
 }
